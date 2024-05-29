@@ -1,0 +1,96 @@
+/**********************************/
+/* Table Name: 식단 카테고리 */
+/**********************************/
+DROP TABLE EATCATE;
+DROP TABLE FOODCATE;
+DROP TABLE FOODCATE CASCADE CONSTRAINTS;
+
+	
+
+
+ 
+
+DROP SEQUENCE FOODCATE_SEQ;
+DROP SEQUENCE EATCATE_SEQ;
+CREATE SEQUENCE FOODCATE_SEQ
+    START WITH 1         -- 시작 번호
+    INCREMENT BY 1       -- 증가값
+    MAXVALUE 9999999999  -- 최대값: 9999999999 --> NUMBER(10) 대응
+    CACHE 2              -- 2번은 메모리에서만 계산
+    NOCYCLE;            
+
+--CREATE TABLE FOODCATE(
+--		FOODCATENO                    		NUMBER(10)		 NOT NULL		 PRIMARY KEY,
+--		IMAGE                         		VARCHAR2(10)		 NULL ,
+--		FDATE                         		DATE		 NOT NULL,
+--		ADMINSNO                      		NUMBER(10)		 NULL ,
+--		FOODCODE                      		NUMBER(30)		 NOT NULL,
+--  FOREIGN KEY (ADMINSNO) REFERENCES ADMINS (ADMINSNO)
+--);
+--
+--
+--
+--COMMENT ON TABLE FOODCATE is '식단 카테고리';
+--COMMENT ON COLUMN FOODCATE.FOODCATENO is '식단 번호';
+--COMMENT ON COLUMN FOODCATE.IMAGE is '식품 이미지';
+--COMMENT ON COLUMN FOODCATE.FDATE is '등록일';
+--COMMENT ON COLUMN FOODCATE.ADMINSNO is '관리자 번호';
+--COMMENT ON COLUMN FOODCATE.FOODCODE is '식품 코드';
+--
+CREATE TABLE FOODCATE(
+		FOODCATENO                    		NUMBER(10)		 NOT NULL		 PRIMARY KEY,
+		FDATE                         		DATE		 NOT NULL,
+		ADMINSNO                      		NUMBER(10)		 NULL ,
+		FOODCODE                      		NUMBER(30)		 NOT NULL,
+		FNAME                         		VARCHAR2(1000)		 NULL ,
+		FUPNAME                       		VARCHAR2(1000)		 NULL ,
+		THUMB                         		VARCHAR2(1000)		 NULL ,
+		FSIZE                         		NUMBER(10)		 NULL ,
+  FOREIGN KEY (ADMINSNO) REFERENCES ADMINS (ADMINSNO)
+);
+select * from foodcate
+
+COMMENT ON TABLE FOODCATE is '식단 카테고리';
+COMMENT ON COLUMN FOODCATE.FOODCATENO is '식단 번호';
+COMMENT ON COLUMN FOODCATE.FDATE is '등록일';
+COMMENT ON COLUMN FOODCATE.ADMINSNO is '관리자 번호';
+COMMENT ON COLUMN FOODCATE.FOODCODE is '식품 코드';
+COMMENT ON COLUMN FOODCATE.FNAME is '원본 파일명';
+COMMENT ON COLUMN FOODCATE.FUPNAME is '업로드된 파일명';
+COMMENT ON COLUMN FOODCATE.THUMB is 'Preview 이미지';
+COMMENT ON COLUMN FOODCATE.FSIZE is '파일 사이즈';
+
+
+
+-- CRFOODE
+INSERT INTO FOODCATE (FOODCATENO,IMAGE, fdate, adminsno, foodcode,FNAME,FUPNAME,THUMB,FSIZE)
+VALUES (FOODCATE_seq.nextval,'image.jpg', sysdate, 1,101000100);
+
+
+INSERT INTO FOODCATE (FOODCATENO, ADMINNO, IMAGE, NAME, NAMESUB, VISIBLE, EDATE)
+VALUES (FOODCATE_seq.nextval, 123456, 'image.jpg', 'Healthy', '-', 'N',sysdate);
+
+INSERT INTO FOODCATE (FOODCATENO, ADMINNO, IMAGE, NAME, NAMESUB, VISIBLE, EDATE)
+VALUES (FOODCATE_seq.nextval, 1, 'image2.jpg', 'Healthy', '-', 'N',sysdate);
+
+
+-- READ
+SELECT FOODCATENO,IMAGE, fdate, adminsno, foodcode 
+FROM FOODCATE;
+
+commit
+SELECT FOODCATENO, ADMINNO, IMAGE, NAME, NAMESUB, VISIBLE, EDATE 
+FROM FOODCATE
+WHERE ADMINNO > 2;
+
+-- UPDATE
+UPDATE FOODCATE
+SET ADMINNO = 3
+WHERE FOODCATENO = 3;
+
+UPDATE FOODCATE
+SET ADMINNO = 3
+WHERE FOODCATENO = 1;
+
+DELETE FROM FOODCATE
+WHERE FOODCATENO = 4;

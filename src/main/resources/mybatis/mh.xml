@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="dev.mvc.mh.MhDAOInter">
+  <select id="read" resultType="dev.mvc.mh.MhVO" parameterType="int">
+    SELECT mhno, kg, ckg, cm, muscle, memberno,insertdate
+    FROM mh
+    WHERE mhno = #{mhno}
+ </select>
+ 
+  <insert id="create" parameterType="dev.mvc.mh.MhDAOInter">
+    INSERT INTO mh(mhno, kg, ckg, cm, muscle, memberno,insertdate)
+    VALUES (mh_seq.nextval, #{kg}, #{ckg}, #{cm}, #{muscle}, #{memberno},sysdate)
+  </insert>
+  
+  <delete id="delete" parameterType="int">
+    DELETE FROM mh
+    WHERE mhno=#{mhno}
+  </delete>
+  
+   <select id="list_all" resultType="dev.mvc.mh.MhVO" parameterType="int">
+    SELECT mhno, kg, ckg, cm, muscle, memberno,insertdate
+    FROM mh
+    WHERE memberno = #{memberno}
+    ORDER BY mhno ASC
+  </select>
+  
+
+    <!-- MH 수정 -->
+  <update id="update" parameterType="dev.mvc.mh.MhVO">
+     UPDATE mh
+     SET kg = #{kg},ckg = #{ckg},cm = #{cm},muscle = #{muscle},insertdate = sysdate
+     WHERE  MHNO = #{mhno}
+  </update>
+
+
+  <select id="list_search_paging" resultType="dev.mvc.mh.MhVO" parameterType="Map">
+    SELECT mhno, kg, ckg, cm, muscle, memberno,insertdate, r
+    FROM (
+        SELECT mhno, kg, ckg, cm, muscle, memberno,insertdate, rownum as r
+        FROM (
+            SELECT mhno, kg, ckg, cm, muscle, memberno,insertdate
+            FROM mh
+            
+ 
+            ORDER BY mhno ASC
+        )
+    )
+    WHERE r &gt; = #{start_num} AND r &lt; = #{end_num} 
+  </select>
+
+    <select id="list_search_count" resultType="int" parameterType="String">
+    SELECT COUNT(*) as cnt
+    FROM mh
+    ORDER BY mhno ASC
+  </select>
+
+
+</mapper>
+
+
+
+
+
+
+
+
+

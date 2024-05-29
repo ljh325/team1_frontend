@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- 주찬 xml 회원  (o)표시: 수정 완료  -->
+<!--
+    MEMBERNO                          NUMBER(10)     NOT NULL    PRIMARY KEY,
+    ID                                VARCHAR2(30)     NOT NULL,
+    PASSWD                            VARCHAR2(200)    NOT NULL,
+    MNAME                             VARCHAR2(30)     NOT NULL,
+    TEL                               VARCHAR2(14)     NOT NULL,
+    ZIPCODE                           VARCHAR2(5)    NULL ,
+    ADDRESS1                          VARCHAR2(80)     NULL ,
+    ADDRESS2                          VARCHAR2(50)     NULL ,
+    MDATE                             DATE     NOT NULL,
+    GRADE                             NUMBER(2)    NOT NULL,
+    PROFILE                           VARCHAR2(1000)     NULL ,
+    POINT                             NUMBER(10)     NOT NULL, 
+-->
+<mapper namespace="dev.mvc.member.MemberDAOInter"> <!-- SB가 자동으로 구현하여 연동하는 interface -->
+
+  <!-- (o)  중복 아이디 검사 || 존재 1, 없으면 0 -->
+  <select id="checkID" resultType="int" parameterType="String">
+    SELECT COUNT(id) as cnt
+    FROM member
+    WHERE id=#{id}
+  </select>
+  
+  <!-- (o) 회원 가입 || (참고) 시퀀스 명 디비랑 일치하는지 비교해야함 //member_seq// , 회원 이미지 : profile 설계 필요  -->
+  <insert id="create" parameterType="dev.mvc.member.MemberVO">
+    INSERT INTO member(memberno, id, passwd, mname, tel, zipcode, address1, address2, mdate, birth, sex)
+    VALUES (member_seq.nextval, #{id}, #{passwd}, #{mname}, #{tel}, #{zipcode}, 
+                 #{address1}, #{address2}, sysdate, #{birth}, #{sex})
+  </insert>
+
+  <!-- (o) 회원 전체 목록 || profile (X) -->
+  <select id="list" resultType="dev.mvc.member.MemberVO">
+    SELECT memberno, id, passwd, mname, tel, zipcode, address1, address2, mdate, grade, point, birth, sex
+    FROM member
+    ORDER BY grade ASC, id ASC
+  </select>
+  
+  
+  <!-- (o) memberno로 회원 정보 조회 -->
+  <select id="read" resultType="dev.mvc.member.MemberVO" parameterType="int">
+    SELECT memberno, id, passwd, mname, tel, zipcode, address1, address2, mdate, grade, point, birth, sex,
+    profile, profilesaved, thumbs, sizes
+    FROM member
+    WHERE memberno = #{memberno}
+  </select>  
+
+  <!-- (o) (로그인) id로 회원 정보 조회 -->
+  <select id="readById" resultType="dev.mvc.member.MemberVO" parameterType="String">
+    SELECT memberno, id, passwd, mname, tel, zipcode, address1, address2, mdate, grade, profile, point, birth, sex
+    FROM member
+    WHERE id = #{id}
+  </select>
+  
+  <!-- (o) 수정 처리 -->
+  <update id="update" parameterType="dev.mvc.member.MemberVO">
+    UPDATE member 
+    SET mname=#{mname}, passwd=#{passwd}, tel=#{tel}, zipcode=#{zipcode}, address1=#{address1}, address2=#{address2},
+    profile=#{profile}, profilesaved=#{profilesaved}, thumbs=#{thumbs}, sizes=#{sizes} WHERE memberno=#{memberno}
+  </update>
+  
+  <!-- 파일 수정 -->
+  <update id="update_profile" parameterType="dev.mvc.member.MemberVO">
+    UPDATE member
+    SET profile=#{profile}, profilesaved=#{profilesaved}, thumbs=#{thumbs}, sizes=#{sizes}
+    WHERE memberno = #{memberno}
+  </update>  
+  
+  
+  <!-- (o) 회원 삭제 처리 || 탈퇴 성공 : 1, 실패 : 0 -->
+  <!-- 회원등급 -> 일반회원: 1, 정지회원: 2, 탈퇴회원: 3 -->
+  <update id="delete" parameterType="int">
+    UPDATE member
+    SET grade=3
+    WHERE memberno=#{memberno}
+  </update>
+
+  <!-- (o)로그인 처리 || 로그인성공시 : 1, 실패 : 0 || 탈퇴회원:3 이 아닌 회원 로그인-->
+  <select id="login" resultType="int" parameterType="HashMap">
+    SELECT COUNT(memberno) as cnt
+    FROM member
+    WHERE id=#{id} AND passwd=#{passwd} AND grade != 3
+  </select>
+  
+  <!--  (o) 현재 패스워드 검사 -->
+  <!--<select id="passwd_check" parameterType="HashMap" resultType="int">
+    SELECT COUNT(memberno) as cnt
+    FROM member
+    WHERE memberno=#{memberno} AND passwd=#{passwd}
+  </select>-->
+   
+  <!-- (o) 패스워드 변경 -->
+  <!--<update id="passwd_update" parameterType="HashMap">
+    UPDATE member
+    SET passwd=#{passwd}
+    WHERE memberno=#{memberno}
+  </update>-->
+  
+</mapper>
+
