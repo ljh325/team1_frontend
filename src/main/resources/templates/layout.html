@@ -1,35 +1,103 @@
 <!DOCTYPE html>
 <html lang="ko">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="user-scalable=yes, initial-scale=1.0, minimum-scale=1.0, maximum-scale=10.0, width=device-width" /> 
-<title>헬스 포인터</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="user-scalable=yes, initial-scale=1.0, minimum-scale=1.0, maximum-scale=10.0, width=device-width" /> 
+  <title>헬스 포인터</title>
 
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.10.0/font/bootstrap-icons.min.css" rel="stylesheet">
+  
+  <script type="text/JavaScript" src="http://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
-<script type="text/JavaScript" src="http://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-
-<link href="/css/style.css" rel="Stylesheet" type="text/css"> <!-- /static 기준 -->
-<link rel="shortcut icon" href="/images/star.png" />
-
+  <link href="/css/style.css" rel="stylesheet" type="text/css"> <!-- /static 기준 -->
+  <link rel="shortcut icon" href="/images/star.png" />
 </head>
+
 <body>
-<div class='container_main'>
+  <!-- container_main 시작 -->
+  <div class='container_main'>
 
-  <div th:replace="~{navbar::navbarFragment}"></div> <!-- navbar.html navbarFragment import -->
-  
-  <div class='content_body'>
-    <th:block layout:fragment="content"></th:block> <!-- 각 파일의 내용 출력 -->
-  </div> <!-- content_body 종료 --> 
-  
-  <div class='bottom_menu'>
-    <hr>
-    Copyright K Digital, 국가기간 전략산업 직종 직업 훈련 All rights reserved.
+
+    <!-- navbar 시작 -->
+    <div th:replace="~{navbar::navbarFragment}">
+      <!-- navbar.html navbarFragment import -->
+    </div>
+    <!-- navbar 종료 -->
+
+
+    <!-- content_body 시작 -->
+    <div class='content_body'>
+      <th:block layout:fragment="content"></th:block> <!-- 각 파일의 내용 출력 -->
+    </div>
+    <!-- content_body 종료 -->
+
+<style>
+    .bottom_menu {
+      margin-top: 100px;
+    }
+    .navigation {
+      position: fixed;
+      bottom: 0;
+      width: 100%;
+      background-color: white;
+      display: flex;
+      justify-content: space-around;
+      padding: 10px 0;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 6px 10px rgba(0, 0, 0, 0.1); /* 그림자 추가 */
+      border: 1px solid #999;
+      font-size: 8px; /* 글자 크기 조정 */
+    }
+    .navigation a {
+      text-align: center;
+      cursor: pointer; /* 포인터 커서로 변경 */
+    }
+    .navigation a span {
+      display: block;
+      margin-top: 0px; /* 아이콘과 글자 사이의 간격 조정 */
+      font-size: 9px; /* 텍스트 크기 변경 */
+    }
+    .navigation .bi {
+      font-size: 1.2rem; /* 아이콘 크기 */
+    }
+    .navigation a:hover {
+      color: #007bff; /* 호버 시 색상 변경 */
+    }
+</style>
+
+
+
   </div>
+  <!-- container_main 종료 -->
+      <!-- footer 시작 -->
+    
+<div class='bottom_menu'>
+  <div class="navigation">
+    <a href="/" aria-label="운동">
+      <i class="bi bi-heart"></i> <!-- 운동 아이콘 -->
+      <span>운동</span>
+    </a>
+    <a href="/analysis" aria-label="분석">
+      <i class="bi bi-graph-up"></i> <!-- 분석 아이콘 -->
+      <span>분석</span>
+    </a>
+    <a href="/community" aria-label="커뮤니티">
+      <i class="bi bi-people"></i> <!-- 커뮤니티 아이콘 -->
+      <span>커뮤니티</span>
+    </a>
 
-</div> <!-- container_main 종료 -->   
-
+    <a th:if="${session.memberno != null}" th:href="@{|/member/read?memberno=${session.memberno}|}" aria-label="프로필">
+      <i class="bi bi-person"></i> <!-- 프로필 아이콘 -->
+      <span>프로필</span>
+    </a>
+    <a th:if="${session.memberno == null}" th:href="@{/member/login}" aria-label="로그인">
+      <i class="bi bi-person"></i> <!-- 로그인 아이콘 -->
+      <span>로그인</span>
+    </a>
+</div>
+<!-- footer 종료 -->
 </body>
 </html>
 
