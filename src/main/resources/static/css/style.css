@@ -14,7 +14,7 @@
 }
   /* 모든 태그에 적용 */
   *{
-     font-family: Ownglyph_meetme-Rg; 
+     font-family: WagleWagle; 
      font-size: 30px; 
      margin: 0px;  /* top right bottom left */
      padding: 0px;
@@ -35,11 +35,11 @@
       top: 0px;
       padding: 0;
       width: 98%;
-      background-color: white;
+      background-color: rgb(255, 255, 255);
       display: flex;
       justify-content: space-between;
       padding: 1px 0;
-      box-shadow: 0 1px 6px rgb(128, 255, 255), 0 6px 10px rgba(0, 0, 0, 0.1); /* 그림자 추가 */
+      box-shadow: 0 4px 3px  rgb(255, 0, 0), 0 6px 10px rgba(0, 0, 0, 0.1); /* 그림자 추가 */
       border: 1px solid #999;
       font-size: 8px; /* 글자 크기 조정 */
     }
@@ -216,11 +216,11 @@
       position: fixed;
       padding: 0;
       width: 98%;
-      background-color: white;
+      background-color: rgb(255, 255, 255);
       display: flex;
       justify-content: space-around;
       padding: 1px 0;
-      box-shadow: 0 1px 6px rgb(128, 255, 255), 0 6px 10px rgba(0, 0, 0, 0.1); /* 그림자 추가 */
+      box-shadow: 0px 2px 4px 7px rgb(255, 0, 0), 0 6px 10px rgba(0, 0, 0, 0.1); /* 그림자 추가 */
       border: 1px solid #999;
       font-size: 9px; /* 글자 크기 조정 */
     }
@@ -351,6 +351,28 @@
     margin: 0px auto;
     font-size: 20px;  
     color: rgb(255, 0, 0);
+    
+    display: flex;
+  }
+    .member_title_line {
+    text-align: left;
+    border-bottom: solid 1px rgb(128, 0, 0);
+    width: 100%;
+    margin-top: -30px;
+    margin: 0px auto;
+    font-size: 20px;  
+    color: rgb(0, 0, 0);
+    
+    display: flex;
+  }
+      .review_title_line {
+    text-align: left;
+    border-bottom: solid 1px rgb(128, 0, 0);
+    width: 100%;
+    margin-top: -30px;
+    margin: 0px auto;
+    font-size: 20px;  
+    color: rgb(0, 0, 0);
     
     display: flex;
   }

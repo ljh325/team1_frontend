@@ -215,17 +215,7 @@
           }
           
           
-          // 우편번호 유효성 검사 **  
-          let zipcode = document.getElementById('zipcode');
-          let zipcode_msg = document.getElementById('zipcode_msg');
 
-          if (zipcode.value.length == 0) {
-            zipcode_msg.innerHTML = '우편번호입력은 필수입니다.';
-            zipcode_msg.classList.add('span_warning');    // class 적용
-            zipcode.focus();
-
-            return false;  // 회원 가입 진행 중지
-          }
           
           // 주소 유효성 검사 **  
           let address1 = document.getElementById('address1');
