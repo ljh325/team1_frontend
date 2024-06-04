@@ -56,13 +56,13 @@
                         </div>
                         <div class="collapse navbar-collapse" id="navDropdown">
                               <ul class="nav-top" style="font-size: 10px;">
-                                <li class="review_title_line" th:each="cateVOMenu:${menu}">
+                                <li class="review_title_line" th:each="htcVOMenu:${menu}">
                                       <a class="review_title_line" href="#" id="navbarDropdownMenuLink" 
-                                           role="button" data-bs-toggle="dropdown" aria-expanded="false" th:text="${cateVOMenu.name}">                                                            
+                                           role="button" data-bs-toggle="dropdown" aria-expanded="false" th:text="${htcVOMenu.name}">                                                            
                                       </a>
                                       <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                                          <a th:each="cateVO:${cateVOMenu.list_namesub}">
-                                          <a class="member_title_line" href="#" th:text="${cateVO.namesub}"></a>
+                                          <a th:each="htcVO:${htcVOMenu.list_namesub}">
+                                          <a class="member_title_line" th:href="@{|/health/list_by_htcno?htcno=${htcVO.htcno}|}" th:text="${htcVO.namesub}"></a>
                                           </a>
                                       </ul>
                                 </li>
@@ -100,9 +100,12 @@
                                 </div>
                               <!-- admin 운동 글 전체  -->   
                                 <div style="display: flex; justify-content: space-around;">
-                                    <a class="member_title_line" href="/health/list_all?now_page=1">운동 글 전체 목록</a>
+                                    <a class="review_title_line" href="/health/list_all?now_page=1">운동 글 전체 목록</a>
                                 </div>
-                                
+                                                    <!-- admin 운동 카테 등록 목록 -->
+                                <div style="display: flex; justify-content: space-around;">
+                                    <a class="review_title_line" href="/htc/list_search">운동 카테 등록, 목록 </a>
+                                </div>
 
 
                           </ul>

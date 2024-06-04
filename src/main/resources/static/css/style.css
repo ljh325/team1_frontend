@@ -73,6 +73,51 @@
     width: 40px;
     }
 
+   .container_main {
+    width: 98%; 
+    margin: 1px auto;
+    
+    } 
+     .main_menu {
+      margin-top: 100px;
+    }
+    .main_navigation {
+    
+      position: fixed;
+      top: 50px;
+      padding: 0;
+      width: 98%;
+      background-color: white;
+      display: flex;
+      justify-content: space-around;
+      padding: 1px 0;
+      box-shadow: 0 1px 6px rgb(128, 255, 255), 0 6px 10px rgba(0, 0, 0, 0.1); /* 그림자 추가 */
+      border: 1px solid #999;
+      font-size: 8px; /* 글자 크기 조정 */
+    }
+     
+    .main_navigation a {
+      text-align: center;
+      cursor: pointer; /* 포인터 커서로 변경 */
+    }
+    .main_navigation a span {
+      display: block;
+      margin-top: 0px; /* 아이콘과 글자 사이의 간격 조정 */
+      font-size: 14px; /* 텍스트 크기 변경 */
+    }
+    .main_navigation .bi {
+      margin-top: -10px;
+      font-size: 1.2rem; /* 아이콘 크기 */
+    }
+    .main_navigation a:hover {
+      color: rgb(128, 255, 255); /* 호버 시 색상 변경 */
+    }
+    .main_icon{
+      width: 20px;
+    }
+    .offcanvas_icon{
+    width: 40px;
+    }
 
 
   
