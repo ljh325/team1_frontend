@@ -1,5 +1,12 @@
     /* ver 2.3 2024_0322 */
   /*폰트 선언*/
+  
+    @font-face {
+      font-family: 'TTHakgyoansimMonggeulmonggeulR';
+      src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2402_keris@1.0/TTHakgyoansimMonggeulmonggeulR.woff2') format('woff2');
+      font-weight: normal;
+      font-style: normal;
+  }
   @font-face {
     font-family: 'WagleWagle';
     src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2301-wagle@1.0/WagleWagle.woff') format('woff');
@@ -14,7 +21,7 @@
 }
   /* 모든 태그에 적용 */
   *{
-     font-family: WagleWagle; 
+     font-family: TTHakgyoansimMonggeulmonggeulR; 
      font-size: 30px; 
      margin: 0px;  /* top right bottom left */
      padding: 0px;
@@ -39,7 +46,7 @@
       display: flex;
       justify-content: space-between;
       padding: 1px 0;
-      box-shadow: 0 4px 3px  rgb(255, 0, 0), 0 6px 10px rgba(0, 0, 0, 0.1); /* 그림자 추가 */
+      box-shadow: 0 4px 3px  rgb(128, 255, 255), 0 6px 10px rgba(0, 0, 0, 0.1); /* 그림자 추가 */
       border: 1px solid #999;
       font-size: 8px; /* 글자 크기 조정 */
     }
@@ -220,7 +227,7 @@
       display: flex;
       justify-content: space-around;
       padding: 1px 0;
-      box-shadow: 0px 2px 4px 7px rgb(255, 0, 0), 0 6px 10px rgba(0, 0, 0, 0.1); /* 그림자 추가 */
+      box-shadow: 0px 2px 4px 7px rgb(128, 255, 255), 0 6px 10px rgba(0, 0, 0, 0.1); /* 그림자 추가 */
       border: 1px solid #999;
       font-size: 9px; /* 글자 크기 조정 */
     }
@@ -356,7 +363,6 @@
   }
     .member_title_line {
     text-align: left;
-    border-bottom: solid 1px rgb(128, 0, 0);
     width: 100%;
     margin-top: -30px;
     margin: 0px auto;

@@ -19,66 +19,82 @@
       <div class="offcanvas-body">
           <ul class="navbar-nav me-auto mb-2 mb-lg-0">
             
-            <span style="background-color: rgb(192, 192, 192); text-align:star;">로고
-            <!-- 이메일 및 아이디 회원 이름-->
-                <div style="display: flex; justify-content: space-around;">
-                    <div class="member_title_line">내 계정 </div>
-                      <aside class="aside_right">
-                      <!-- 이메일 및 아이디 회원 이름 등록   -->
-                      </aside>
-                </div>
-                
-                <!-- 리뷰남기기, 문의-->
-                <div style="display: flex; justify-content: space-around;">
-                    <div class="review_title_line">리뷰 </div>
-                      <aside class="aside_right">
-                        <!-- 리뷰남기기, 문의 하기  -->
-                      </aside>
-               </div>
-               <!-- 정보-->
-                <div style="display: flex; justify-content: space-around;">
-                    <div class="review_title_line">정보 </div>
-                      <aside class="aside_right">
-                        <!-- 정보, 이용약관 등록 -->
-                      </aside>
-               </div>
-            </span>
-            
-            
-           <a class="nav-link" href="/htc/list_search">운동 카테 목록</a></li>
-                 
-                  <li class="nav-item dropdown" th:each="cateVOMenu:${menu}">
-                      <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" 
-                           role="button" data-bs-toggle="dropdown" aria-expanded="false" th:text="${cateVOMenu.name}">                                                            
-                      </a>
-                      <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                          <li th:each="cateVO:${cateVOMenu.list_namesub}"><a class="dropdown-item" href="#" th:text="${cateVO.namesub}"></a></li>
-                      </ul>
-                  </li>
-              
-                <li class="nav-item dropdown" th:if="${session.grade=='admin'}">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" 
-                         role="button" data-bs-toggle="dropdown" aria-expanded="false" th:text="관리자등록">                                                            
-                    </a>
-                    <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                          <li class="nav-item"><a class="nav-link" href="/member/list">회원 목록</a></li>
-                          <li class="nav-item"><a class="nav-link" href="/htc/list_search">운동 카테 목록</a></li>
-                          <li class="nav-item"><a class="nav-link" href="/health/list_all?now_page=1">운동 전체 목록</a></li>
-                    </ul>
-                </li>
-            
-            
-            <span style="background-color: rgb(192, 192, 192); text-align:star;">계정관리
-                       <!-- 로그아웃 탈퇴하기-->
-                <div style="display: flex; justify-content: space-around;">
-                    <div class="review_title_line">개인 </div>
-                      <aside class="aside_right">
-                        <!-- 로그아웃 등록 -->
-                      </aside>
-               </div>
+                 <span style="background-color: rgb(192, 192, 192); text-align:center;">로고
+                    
+                    <!-- 이메일 및 아이디 회원 이름-->
+                        <div style="display: flex; justify-content: space-around;">
+                            <div class="member_title_line">내 계정 </div>
+                              <aside class="aside_right">
+                              <!-- 이메일 및 아이디 회원 이름 등록   -->
+                              </aside>
+                        </div>
+                        
+                      <!-- 카테 목록 바로 가기-->
+                        <div style="display: flex; justify-content: space-around;">
+                            <div class="review_title_line">바로가기</div>
+        
+                          
+                       </div>
+                        
+                        <!-- 리뷰남기기, 문의-->
+                        <div style="display: flex; justify-content: space-around;">
+                            <div class="review_title_line">리뷰 </div>
+                              <aside class="aside_right">
+                                <!-- 리뷰남기기, 문의 하기  -->
+                              </aside>
+                       </div>
+                       
+                       <!-- 정보-->
+                        <div style="display: flex; justify-content: space-around;">
+                            <div class="review_title_line">정보 </div>
+                              <aside class="aside_right">
+                                <!-- 정보, 이용약관 등록 -->
+                              </aside>
+                       </div>
+                       
+                       <!--로그인 로그아웃 탈퇴하기 등록 필요-->
+                        <div style="display: flex; justify-content: space-around;">
+                            <a class="review_title_line" th:if="${session.memberno == null}" th:href="@{/member/login}" >로그인 </a>
+                                
+                         <a class="review_title_line" th:if="${session.memberno == null}"href="/member/create">회원가입</a>
+                            <div class="review_title_line" th:if="${session.memberno != null}" >
+                               <a class="review_title_line" href="/member/logout">로그아웃</a>
+                            </div>
+                       </div> 
+                    </span>
+                        
+          
+                    <!-- admin 권한 -->
+                    <span style="background-color: rgb(192, 192, 192); text-align:center;" th:if="${session.grade=='admin'}">관리자 등록
+                              
 
-                
-            </span>
+                    <!-- admin 전체 회원 목록 -->
+                        <div style="display: flex; justify-content: space-around;">
+                            <a class="member_title_line" href="/member/list">회원 목록</a>
+                        </div>
+                    <!-- admin 운동 카테 등록 목록 -->
+                        <div style="display: flex; justify-content: space-around;">
+                            <a class="member_title_line" href="/htc/list_search">운동 카테 등록, 목록 </a>
+                        </div>
+                     <!-- admin 운동 글 전체  -->   
+                        <div style="display: flex; justify-content: space-around;">
+                            <a class="member_title_line" href="/health/list_all?now_page=1">운동 글 전체 목록</a>
+                        </div>
+                        
+                      <!-- admin 소분류 운동 카테 회원이 볼수 있는(0) -->
+                        <li class="nav-item dropdown" th:each="cateVOMenu:${menu}">
+                              <a class="member_title_line" href="#" id="navbarDropdownMenuLink" 
+                                   role="button" data-bs-toggle="dropdown" aria-expanded="false" th:text="${cateVOMenu.name}">                                                            
+                              </a>
+                              <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                                  <a th:each="cateVO:${cateVOMenu.list_namesub}">
+                                  <a class="member_title_line" href="#" th:text="${cateVO.namesub}"></a>
+                                  </a>
+                              </ul>
+                        </li>
+        
+                    </span>
+          
                    
           </ul>
       </div>
